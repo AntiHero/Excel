@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="bundle.css">
+    <title>Excel</title>
+  </head>
+  <body>
+    <div id="app" class="container">
+      <div class="excel">
+        <div class="excel__header">
+          <input type="text" class="excel__title-input" value="New table" />
+          <div class="excel__button-wrapper">
+            <div class="excel__button">
+              <i class="material-icons">delete</i>
+            </div>
+            <div class="excel__button">
+              <i class="material-icons">exit_to_app</i>
+            </div>
+          </div>
+        </div>
+        <div class="excel__toolbar">
+          <div class="excel__button">
+            <i class="material-icons">format_align_left</i>
+          </div>
+          <div class="excel__button">
+            <i class="material-icons">format_align_center</i>
+          </div>
+          <div class="excel__button">
+            <i class="material-icons">format_align_right</i>
+          </div>
+          <div class="excel__button">
+            <i class="material-icons">format_bold</i>
+          </div>
+          <div class="excel__button">
+            <i class="material-icons">format_italic</i>
+          </div>
+          <div class="excel__button">
+            <i class="material-icons">format_underline</i>
+          </div>
+        </div>
+        <div class="excel__formula">
+          <div class="excel__formula-logo">
+            <i class="material-icons">functions</i>
+          </div>
+          <div
+            contenteditable="true"
+            spellcheck="false"
+            class="excel__formula-input"
+          ></div>
+        </div>
+        <div class="excel__table">
+          <div class="excel__table-row">
+            <div class="table__row-number table__row-number--empty"></div>
+            <div class="table__row-data">
+              <div class="table__column">a</div>
+              <div class="table__column">b</div>
+              <div class="table__column">c</div>
+              <div class="table__column">d</div>
+              <div class="table__column">e</div>
+            </div>
+          </div>
+          <div class="excel__table-row">
+            <div class="table__row-number">1</div>
+            <div class="table__row-data">
+              <div
+                class="table__cell table__cell--selected"
+                spellcheck="false"
+                contenteditable="true"
+              >
+                0
+              </div>
+              <div
+                class="table__cell"
+                spellcheck="false"
+                contenteditable="true"
+              >
+                1
+              </div>
+              <div
+                class="table__cell"
+                spellcheck="false"
+                contenteditable="true"
+              >
+                2
+              </div>
+              <div
+                class="table__cell"
+                spellcheck="false"
+                contenteditable="true"
+              >
+                3
+              </div>
+              <div
+                class="table__cell"
+                spellcheck="false"
+                contenteditable="true"
+              >
+                4
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </body>
+</html>
