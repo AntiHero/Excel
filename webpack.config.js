@@ -90,6 +90,10 @@ const config = {
         exclude: /(node_modules|public)/,
         use: jsLoaders(),
       },
+      {
+        test: /\.(png|woff|woff2|eot|ttf|svg)$/,
+        loader: 'url-loader?limit=100000&name=fonts/[name].[ext]',
+      },
     ],
   },
   devServer: {

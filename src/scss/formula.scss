@@ -1,0 +1,31 @@
+@import './variables';
+
+.excel__formula {
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: $toolbar-height + $header-height;
+  height: $formula-height;
+  border-bottom: 1px solid $border-color;
+  display: grid;
+  grid-template-columns: $row-number-width auto;
+  padding: 0 15px;
+  grid-template-areas: 'logo input';
+
+  &-logo {
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    grid-area: logo;
+    border-right: 1px solid $border-color;;
+  }
+
+  &-input {
+    grid-area: input;
+    padding: 4px;
+    font-size: 14px;
+    line-height: $formula-height - 8px;
+    outline: none;
+    color: $black;
+  }
+}
