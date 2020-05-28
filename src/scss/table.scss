@@ -12,24 +12,53 @@
   &-row {
     display: flex;
     flex-direction: row;
-    min-height: 20px;
+    min-height: $min-row-height;
     height: $row-height;
   }
 }
 
 .table__row {
   &-number {
+    position: relative;
     display: flex;
     justify-content: center;
     align-items: center;
     min-width: $row-number-width + 15px;
-    height: 100%;
+    min-height: $min-row-height;
     border: 1px solid $border-color;
     border-top: none;
     background-color: $light-gray;
+    height: 100%;
+    -webkit-touch-callout: none; /* iOS Safari */
+    -webkit-user-select: none; /* Safari */
+     -khtml-user-select: none; /* Konqueror HTML */
+       -moz-user-select: none; /* Old versions of Firefox */
+        -ms-user-select: none; /* Internet Explorer/Edge */
+            user-select: none; 
   
     &--empty {
       background-color: transparent;
+    }
+  }
+
+  &-resize {
+    position: absolute;
+    bottom: 0;
+    right: 0;
+    left: 0;
+    height: 3px;
+    background-color: $blue;
+    opacity: 0;
+    transition: all .1s;
+    z-index: 2;
+
+    &--hidden {
+      visibility: hidden;
+    }
+
+    &:hover {
+      opacity: 1;
+      cursor: row-resize;
     }
   }
 
@@ -39,6 +68,7 @@
 }
 
 .table__column {
+  position: relative;
   text-transform: uppercase;
   display: flex;
   justify-content: center;
@@ -49,6 +79,29 @@
   border-top: none;
   border-left: none;
   background-color: $light-gray;
+  -webkit-touch-callout: none; /* iOS Safari */
+  -webkit-user-select: none; /* Safari */
+   -khtml-user-select: none; /* Konqueror HTML */
+     -moz-user-select: none; /* Old versions of Firefox */
+      -ms-user-select: none; /* Internet Explorer/Edge */
+          user-select: none; 
+
+  &-resize {
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    right: 0;
+    width: 3px;
+    background-color: $blue;
+    opacity: 0;
+    transition: all .1s;
+    z-index: 2;
+
+    &:hover {
+      opacity: 1;
+      cursor: col-resize;
+    }
+  }
 }
 
 .table__cell {
