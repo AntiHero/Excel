@@ -5,27 +5,37 @@ const CODES = {
 
 function createRow(number, content) {
   return (
-    `<div class='excel__table-row'>
-      <div class='table__row-number'>${number}</div>
+    `<div class='excel__table-row' data-target="${number}">
+      <div class='table__row-number'>
+        ${number}
+        <div class=${!number ?
+          'table__row-resize--hidden' : 'table__row-resize'} 
+          data-resize="row"></div>
+      </div>
       <div class='table__row-data'>${content}</div>
     </div>`
   );
 }
 
-function createCell(content) {
+function createCell(content, col) {
   return (`
     <div
       class="table__cell"
       spellcheck="false"
       contenteditable="true"
+      data-col="${col}"
     >
     ${content}
     </div>`
   );
 }
 
-function createColumn(content) {
-  return `<div class="table__column">${content}</div>`;
+function createColumn(content, index) {
+  return `
+    <div class="table__column" data-target data-col="${index}">
+      ${content}
+      <div class="table__column-resize" data-resize="col"></div>
+    </div>`;
 }
 
 function toChar(_, index) {

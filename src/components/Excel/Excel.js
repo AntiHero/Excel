@@ -26,10 +26,6 @@ export class Excel {
   render() {
     this.$el.append(this.getRoot().$el);
     this.components.forEach(component => component.init());
-    setTimeout(() => {
-      console.log('deleting');
-      this.components.forEach(component => component.destroy());
-    }, 10000);
   }
 }
 
