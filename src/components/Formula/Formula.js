@@ -1,12 +1,32 @@
 import {ExcelComponent} from '@/core/ExcelComponent';
-
+import {$} from '@/core/dom';
 export class Formula extends ExcelComponent {
   static className = 'excel__formula';
+  static input = 'excel__formula-input';
 
-  constructor($root) {
+  constructor($root, options) {
     super($root, {
       name: 'Formula',
-      listeners: ['input', 'click'],
+      listeners: ['input', 'keydown'],
+      ...options,
+    });
+  }
+
+  init() {
+    super.init();
+
+    this.$input = this.$root.find(`.${Formula.input}`);
+
+    this.$on('table:select', ($cell) => {
+      this.$input.text = $cell.text;
+    });
+
+    this.$on('table:input', ($cell) => {
+      this.$input.text = $cell.text;
+    });
+
+    this.$on('table:init', ($cell) => {
+      this.$input.text = $cell.text;
     });
   }
 
@@ -22,11 +42,15 @@ export class Formula extends ExcelComponent {
   }
 
   onInput(event) {
-    console.log(this.$root);
-    console.log('onInput formula', event.target.textContent.trim());
+    this.$emit('formula:input', $(event.target).text);
   }
 
-  onClick(event) {
-    console.log(event.target.textContent.trim());
+  onKeydown(event) {
+    const keys = ['Enter', 'Tab'];
+
+    if (keys.includes(event.key)) {
+      event.preventDefault();
+      this.$emit('formula:done');
+    }
   }
 }

@@ -1,6 +1,13 @@
 @import './variables';
 @import './mixins';
 
+:root {
+  --display: none;
+  --width: 0;
+  --height: 0;
+  --shift: 0;
+}
+
 .excel__table {
   position: absolute;
   left: 0;
@@ -105,16 +112,37 @@
 }
 
 .table__cell {
+  position: relative;
   min-width: $row-number-width;
   width: $cell-width;
   padding: 5px;
+  padding-top: 1px;
+  padding-bottom: 1px;
   border: 1px solid $light-gray;
   border-top: none;
   border-left: none;
   white-space: nowrap;
   outline-width: 0;
+  overflow: hidden;
   &--selected {
+    border: 2px solid $blue;
+    border-radius: 2px;
     background-color: $ultra-light-gray;
-    outline-width: thin;
+    outline: none;
+    position: relative;
   }
+}
+
+.table__cell.table__cell--first-in-group:after {
+  content: '';
+  box-sizing: border-box;
+  top: var(--shift);
+  left: var(--shift);
+  z-index: -1;
+  width: var(--width);
+  height: var(--height);
+  position: absolute;
+  border: 1px solid $blue;
+  background-color: $selected;
+  display: var(--display);
 }

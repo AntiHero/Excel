@@ -17,17 +17,35 @@ function createRow(number, content) {
   );
 }
 
-function createCell(content, col) {
-  return (`
+// function createCell(row, col, content) {
+//   return (`
+//     <div
+//       class="table__cell"
+//       spellcheck="false"
+//       contenteditable="true"
+//       data-col="${col}"
+//       data-row="${row}"
+//     >
+//     ${content}
+//     </div>`
+//   );
+// }
+
+function createCell(row) {
+  return function(_, col) {
+    return (`
     <div
       class="table__cell"
       spellcheck="false"
       contenteditable="true"
+      data-type="cell"
       data-col="${col}"
+      data-id="${row}:${col}"
     >
-    ${content}
+    ${_}
     </div>`
-  );
+    );
+  };
 }
 
 function createColumn(content, index) {
@@ -50,14 +68,14 @@ export function createTable(rowsCount = 25) {
       .map(createColumn)
       .join('');
 
-  for (let i = 0; i < rowsCount; i++) {
-    if (i === 0) {
+  for (let row = 0; row < rowsCount; row++) {
+    if (row === 0) {
       rows.push(createRow('', columns));
       continue;
     }
-    rows.push(createRow(i, new Array(colsCount)
+    rows.push(createRow(row, new Array(colsCount)
         .fill('')
-        .map(createCell)
+        .map(createCell(row))
         .join('')));
   }
 

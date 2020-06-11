@@ -1,3 +1,4 @@
+// dom node wrapper with additional funcionality
 class Dom {
   constructor(selector) {
     if (typeof selector === 'string') {
@@ -13,7 +14,20 @@ class Dom {
       return this;
     }
 
+    /* returns serialized HTML fragment
+    describing element including its descendants */
     return this.$el.outerHTML.trim();
+  }
+
+  set text(text) {
+    this.$el.textContent = text;
+  }
+
+  get text() {
+    if (this.$el.tagName.toLowerCase() === 'input') {
+      return this.$el.value.trim();
+    }
+    return this.$el.textContent;
   }
 
   clear() {
@@ -53,8 +67,33 @@ class Dom {
     return this.$el.style;
   }
 
-  find(selector) {
+  findAll(selector) {
     return this.$el.querySelectorAll(selector);
+  }
+
+  find(selector) {
+    return $(this.$el.querySelector(selector));
+  }
+
+  getId(parse) {
+    if (parse) {
+      const parsed = this.getId().split(':');
+      return {
+        row: +parsed[0],
+        col: +parsed[1],
+      };
+    }
+    return this.data.id;
+  }
+
+  addClass(className) {
+    this.$el.classList.add(className);
+    return this;
+  }
+
+  removeClass(className) {
+    this.$el.classList.remove(className);
+    return this;
   }
 
   get data() {
@@ -66,12 +105,19 @@ class Dom {
       this.$el.style[key] = styles[key];
     });
   }
+
+  focus() {
+    this.$el.focus();
+    return this;
+  }
 }
 
+// function create Dom instance and returns it
 export function $(selector) {
   return new Dom(selector);
 }
 
+// creates wrapped node element with selected classes
 $.create = (tagName, classes = '') => {
   const el = document.createElement(tagName);
   if (classes) {
