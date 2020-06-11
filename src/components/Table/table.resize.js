@@ -12,7 +12,7 @@ export function resizeHandler(e, $this, Table) {
     if (e.target.dataset.resize === 'col') {
       $resizer.getStyle().height = tableHeight + 'px';
       const cells =
-        [...$this.$root.find(`[data-col="${$parent
+        [...$this.$root.findAll(`[data-col="${$parent
             .data.col}"]`)];
       cells.shift();
 

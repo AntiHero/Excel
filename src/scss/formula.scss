@@ -27,5 +27,6 @@
     line-height: $formula-height - 8px;
     outline: none;
     color: $black;
+    max-height: $formula-height;
   }
 }
