@@ -1,25 +1,25 @@
 export default class Emitter {
   constructor() {
-    this.listeneres = {};
+    this.listeners = {};
   }
 
   emit(event, ...args) {
-    if (!Array.isArray(this.listeneres[event])) {
+    if (!Array.isArray(this.listeners[event])) {
       return false;
     }
-    this.listeneres[event].forEach((listener) => {
+    this.listeners[event].forEach((listener) => {
       listener(...args);
     });
     return true;
   }
 
   subscribe(event, fn) {
-    this.listeneres[event] = this.listeneres[event] || [];
-    this.listeneres[event].push(fn);
+    this.listeners[event] = this.listeners[event] || [];
+    this.listeners[event].push(fn);
 
     return () => {
-      this.listeneres[event] =
-        this.listeneres[event].filter(listener => listener !== fn);
+      this.listeners[event] =
+        this.listeners[event].filter(listener => listener !== fn);
     };
   }
 }

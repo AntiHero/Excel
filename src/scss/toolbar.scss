@@ -14,6 +14,6 @@
   align-items: center;
 
   .excel__button {
-    @include button($white);
+    @include button($blue);
   }
 }

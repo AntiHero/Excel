@@ -7,6 +7,12 @@ export class TableSelection {
     this.current = null;
   }
 
+  get selectedIds() {
+    return this.group.map($el => {
+      return $el.getId();
+    });
+  }
+
   // $el instanceof DOM
   select($el) {
     this.clear();
@@ -27,5 +33,11 @@ export class TableSelection {
     this.clear(true);
     this.group = $group;
     this.group[0].addClass(TableSelection.firstCell);
+  }
+
+  applyStyle(style) {
+    this.group.forEach($el => {
+      $el.css(style);
+    });
   }
 }

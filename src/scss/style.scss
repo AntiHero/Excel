@@ -18,10 +18,14 @@
   box-sizing: border-box;
 }
 
+html, body {
+  height: 100%;
+}
+
 body {
   font-family: 'Roboto', sans-serif;
   font-weight: 400;
-  font-size: 14px;   
+  font-size: 14px; 
 }
 
 .excel {
@@ -30,4 +34,8 @@ body {
   width: 100%;
   height: 100%;
   max-width: 100%;
+}
+
+.container {
+  height: 100%;
 }
