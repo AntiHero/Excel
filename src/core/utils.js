@@ -53,6 +53,9 @@ export function drawSelectedArea($selectedMap, current, target) {
   let lastCellIdx = null;
   let lastCellCoords = null;
 
+  root.style.setProperty('--top', top + 'px');
+  root.style.setProperty('--left', left + 'px');
+
   if ($selectedMap.length === 1) {
     lastCellIdx = $selectedMap[0].length - 1;
     lastCellCoords = $selectedMap[0][lastCellIdx].getCoords();
@@ -115,4 +118,66 @@ export function nextSelector(key, {col, row}, {height, width}) {
       break;
   }
   return `[data-id="${row}:${col}"]`;
+}
+
+export function storage(key, data = null) {
+  if (!data) {
+    return JSON.parse(localStorage.getItem(key));
+  } else {
+    localStorage.setItem(key, JSON.stringify(data));
+  }
+}
+
+export function isEqual(a, b) {
+  // if (typeof a === 'object' && typeof b === 'object') {
+  //   return JSON.stringify(a) === JSON.stringify(b);
+  // }
+
+  // return a === b;
+  // Create arrays of property names
+  const aProps = Object.getOwnPropertyNames(a);
+  const bProps = Object.getOwnPropertyNames(b);
+
+  // If number of properties is different,
+  // objects are not equivalent
+  if (aProps.length != bProps.length) {
+    return false;
+  }
+
+  for (let i = 0; i < aProps.length; i++) {
+    const propName = aProps[i];
+
+    // If values of same property are not equal,
+    // objects are not equivalent
+    if (a[propName] !== b[propName]) {
+      return false;
+    }
+  }
+
+  // If we made it this far, objects
+  // are considered equivalent
+  return true;
+}
+
+export function camelToDashCase(str) {
+  return str.replace(/[A-Z]/g, m => '-' + m.toLowerCase());
+}
+
+export function toInlineStyles(styles = {}) {
+  return Object.keys(styles)
+      .map(key => `${camelToDashCase(key)}: ${styles[key]}`)
+      .join(';');
+}
+
+export function debounce(fn, wait) {
+  let timeout;
+  return function(...args) {
+    const later = () => {
+      clearTimeout(timeout);
+      // eslint-disable-next-line no-invalid-this
+      fn.apply(this, args);
+    };
+    clearTimeout(timeout);
+    timeout = setTimeout(later, wait);
+  };
 }

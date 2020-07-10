@@ -1,5 +1,6 @@
 import {ExcelComponent} from '@/core/ExcelComponent';
 import {$} from '@/core/dom';
+// import * as actions from '@/redux/actions';
 export class Formula extends ExcelComponent {
   static className = 'excel__formula';
   static input = 'excel__formula-input';
@@ -8,6 +9,7 @@ export class Formula extends ExcelComponent {
     super($root, {
       name: 'Formula',
       listeners: ['input', 'keydown'],
+      subscribe: ['currentText'],
       ...options,
     });
   }
@@ -18,16 +20,13 @@ export class Formula extends ExcelComponent {
     this.$input = this.$root.find(`.${Formula.input}`);
 
     this.$on('table:select', ($cell) => {
-      this.$input.text = $cell.text;
+      console.log($cell.text);
+      this.$input.text = $cell.data.value;
     });
+  }
 
-    this.$on('table:input', ($cell) => {
-      this.$input.text = $cell.text;
-    });
-
-    this.$on('table:init', ($cell) => {
-      this.$input.text = $cell.text;
-    });
+  storeChanged({currentText}) {
+    this.$input.text = currentText;
   }
 
   toHTML() {

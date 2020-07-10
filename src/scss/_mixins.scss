@@ -8,21 +8,25 @@
   text-align: center;
   position: relative;
   display: inline-block;
-  transition: all .1s ease-in-out;
+  transition: all 0s ease-out;
   border-radius: 3px;
+
+  &:hover {
+    background: $gray;
+    cursor: pointer;
+  }
 
   & > i {
     font-size: 18px;
+    -webkit-user-select: none;
   }
 
-  &:active, &.active {
+  &:active, &.active{
     color: $color;
   }
 
-  &:hover {
-    color: $color;
-    background: $gray;
-    cursor: pointer;
+  &:not(.active):hover {
+    color: $white;
   }
 }
 

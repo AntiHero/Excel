@@ -24,7 +24,9 @@ class Dom {
   }
 
   get text() {
+    console.log(this.$el.textContent, 'textcontent');
     if (this.$el.tagName.toLowerCase() === 'input') {
+      console.log(this.$el.value);
       return this.$el.value.trim();
     }
     return this.$el.textContent;
@@ -96,6 +98,12 @@ class Dom {
     return this;
   }
 
+  toggleClass(className) {
+    this.$el.classList.contains(className) ?
+      this.$el.classList.remove(className) :
+      this.$el.classList.add(className);
+  }
+
   get data() {
     return this.$el.dataset;
   }
@@ -106,9 +114,24 @@ class Dom {
     });
   }
 
+  getStyles(styles = []) {
+    return styles.reduce((res, s) => {
+      res[s] = this.$el.style[s];
+      return res;
+    }, {});
+  }
+
   focus() {
     this.$el.focus();
     return this;
+  }
+
+  attr(name, value) {
+    if (value) {
+      this.$el.setAttribute(name, value);
+      return this;
+    }
+    return this.$el.getAttribute(name);
   }
 }
 
