@@ -142,7 +142,6 @@ export class Table extends ExcelStateComponent {
   }
 
   updateTextInStore(value) {
-    console.log('updating');
     this.$dispatch(actions.changeText({
       id: this.selection.current.getId(),
       value,
