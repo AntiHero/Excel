@@ -18,11 +18,6 @@ export class Formula extends ExcelComponent {
     super.init();
 
     this.$input = this.$root.find(`.${Formula.input}`);
-
-    this.$on('table:select', ($cell) => {
-      console.log($cell.text);
-      this.$input.text = $cell.data.value;
-    });
   }
 
   storeChanged({currentText}) {

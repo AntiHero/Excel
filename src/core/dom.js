@@ -24,9 +24,7 @@ class Dom {
   }
 
   get text() {
-    console.log(this.$el.textContent, 'textcontent');
     if (this.$el.tagName.toLowerCase() === 'input') {
-      console.log(this.$el.value);
       return this.$el.value.trim();
     }
     return this.$el.textContent;
